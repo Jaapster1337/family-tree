@@ -13,9 +13,9 @@ public class Person {
 
     private Person father;
 
-    private List<Person> siblings;
+    private List<Person> siblings = new ArrayList<>();
 
-    private List<Person> children;
+    private List<Person> children = new ArrayList<>();
 
     private List<Pet> pets = new ArrayList<>();
 
@@ -122,5 +122,24 @@ public class Person {
     public void addPet(Pet pet){
         List<Pet> petList = this.getPets();
         petList.add(pet);
+    }
+
+    public void addChildren(Person child){
+        List<Person> children = this.getChildren();
+        children.add(child);
+    }
+
+    public void addSiblings(Person sibling){
+        List<Person> siblings = this.getSiblings();
+        siblings.add(sibling);
+    }
+
+    public List<List<Person>> getGrandChildren(){
+        List<Person> children = this.getChildren();
+        List<List<Person>> grandChildren = new ArrayList<>();
+        for(Person child: children){
+            grandChildren.add(child.getChildren());
+        }
+        return grandChildren;
     }
 }
