@@ -80,6 +80,7 @@ public class Person {
 
     public void setMother(Person mother) {
         this.mother = mother;
+        mother.setChildren(List.of(this));
     }
 
     public Person getFather() {
@@ -134,12 +135,15 @@ public class Person {
         siblings.add(sibling);
     }
 
-    public List<List<Person>> getGrandChildren(){
+    public List<Person> getGrandChildren() {
         List<Person> children = this.getChildren();
-        List<List<Person>> grandChildren = new ArrayList<>();
-        for(Person child: children){
-            grandChildren.add(child.getChildren());
-        }
-        return grandChildren;
+        List<Person> grandChildren = new ArrayList<>();
+        for (Person child : children) {
+            if (!child.getChildren().isEmpty()) {
+                for (Person grandchild : child.getChildren()) {
+                    grandChildren.add(grandchild);
+                }
+            }
+        }return grandChildren;
     }
 }
